@@ -1,0 +1,9 @@
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\bin\Debug\Biblioteca.dll
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\bin\Debug\Biblioteca.pdb
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\obj\Debug\Biblioteca.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\obj\Debug\Biblioteca.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\obj\Debug\Biblioteca.dll
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\obj\Debug\Biblioteca.pdb
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Admin\source\repos\CursoWindowsForm\Biblioteca\obj\Debug\Biblioteca.csproj.CopyComplete

@@ -1,0 +1,15 @@
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\bin\Release\CursoWindowsForm.exe.config
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\bin\Release\CursoWindowsForm.exe
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\bin\Release\CursoWindowsForm.pdb
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.Frm_DemonstracaoKey.resources
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.Frm_HelloWord.resources
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.Frm_Mascara.resources
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.Frm_Principal.resources
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.Frm_ValidaCPF.resources
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.Frm_ValidaCPF2.resources
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.Frm_ValidaSenha.resources
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.Properties.Resources.resources
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.csproj.GenerateResource.cache
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.exe
+C:\Users\Admin\source\repos\CursoWindowsForm\CursoWindowsForm\obj\Release\CursoWindowsForm.pdb
