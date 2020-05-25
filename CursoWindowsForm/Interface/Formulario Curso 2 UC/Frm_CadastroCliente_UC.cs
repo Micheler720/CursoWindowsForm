@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations;
 using Biblioteca.Modelo;
 using Biblioteca.Controle;
 using Microsoft.VisualBasic;
-
+using Biblioteca.Modelo.Database;
 
 namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
 {
@@ -189,7 +189,27 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
             {
                 var C = LeituraFormulario();               
                 var controleCliente = new ClienteControle();
+                C.ValidaClasse();
                 controleCliente.ValidaCliente(C);
+                var ClienteJson = ClienteModelo.SerializedClassUnit(C);
+                var F = new Fichario("C:\\Users\\Admin\\source\\repos\\CursoWindowsForm\\Fichario");
+                
+                if (F.Status)
+                {
+                    F.Incluir(C.Id, ClienteJson);
+                    if (F.Status)
+                    {
+                        MessageBox.Show("Ok: " + F.Mensagem, "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: " + F.Mensagem, "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Error: " + F.Mensagem, "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 MessageBox.Show("Classe instanciada com sucesso. Dados Gravados!","ByteBank - Cad. Cliente",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 LimparFormulario();
                 salvarToolStripButton.Enabled = false;
@@ -248,7 +268,6 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
             C.Cep = Msk_CEP.Text;
             C.NomePai = Txt_NomePai.Text;
             C.Profissao = Txt_Profissao.Text;
-            MessageBox.Show(Cmb_Estados.Items[Cmb_Estados.SelectedIndex].ToString());
             if (Information.IsNumeric(Msk_RendaFamiliar.Text))
             {
                 var RendaFamiliar = Convert.ToDouble(Msk_RendaFamiliar.Text);

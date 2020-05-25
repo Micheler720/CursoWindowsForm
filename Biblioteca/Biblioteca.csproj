@@ -51,6 +51,7 @@
     <Compile Include="Extencoes\ListExtencoes.cs" />
     <Compile Include="Modelo\CepModelo.cs" />
     <Compile Include="Modelo\ClienteModelo.cs" />
+    <Compile Include="Modelo\Database\Fichario.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Negocio\Autenticar.cs" />
     <Compile Include="Controle\ControleUsuario.cs" />
