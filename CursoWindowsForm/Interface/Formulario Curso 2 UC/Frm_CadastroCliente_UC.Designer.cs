@@ -71,6 +71,8 @@
             this.salvarToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.ApagatoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.LimpartoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.Txt_CodigoForm = new System.Windows.Forms.TextBox();
+            this.Lbl_CodigoForm = new System.Windows.Forms.Label();
             this.Grp_Codigo.SuspendLayout();
             this.Grp_DadosPessoais.SuspendLayout();
             this.Grp_Genero.SuspendLayout();
@@ -82,7 +84,7 @@
             // Lbl_NomeCliente
             // 
             this.Lbl_NomeCliente.AutoSize = true;
-            this.Lbl_NomeCliente.Location = new System.Drawing.Point(6, 19);
+            this.Lbl_NomeCliente.Location = new System.Drawing.Point(170, 16);
             this.Lbl_NomeCliente.Name = "Lbl_NomeCliente";
             this.Lbl_NomeCliente.Size = new System.Drawing.Size(70, 13);
             this.Lbl_NomeCliente.TabIndex = 0;
@@ -119,9 +121,9 @@
             // 
             this.Txt_NomeCliente.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Txt_NomeCliente.Location = new System.Drawing.Point(9, 35);
+            this.Txt_NomeCliente.Location = new System.Drawing.Point(171, 35);
             this.Txt_NomeCliente.Name = "Txt_NomeCliente";
-            this.Txt_NomeCliente.Size = new System.Drawing.Size(775, 20);
+            this.Txt_NomeCliente.Size = new System.Drawing.Size(613, 20);
             this.Txt_NomeCliente.TabIndex = 2;
             // 
             // Txt_NomeMae
@@ -259,9 +261,12 @@
             this.Txt_Codigo.Name = "Txt_Codigo";
             this.Txt_Codigo.Size = new System.Drawing.Size(200, 20);
             this.Txt_Codigo.TabIndex = 1;
+            this.Txt_Codigo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Txt_Codigo_KeyUp);
             // 
             // Grp_DadosPessoais
             // 
+            this.Grp_DadosPessoais.Controls.Add(this.Lbl_CodigoForm);
+            this.Grp_DadosPessoais.Controls.Add(this.Txt_CodigoForm);
             this.Grp_DadosPessoais.Controls.Add(this.Chk_TemPai);
             this.Grp_DadosPessoais.Controls.Add(this.Lbl_NomePai);
             this.Grp_DadosPessoais.Controls.Add(this.Txt_NomePai);
@@ -508,6 +513,22 @@
             this.LimpartoolStripButton.Text = "toolStripButton1";
             this.LimpartoolStripButton.Click += new System.EventHandler(this.LimpartoolStripButton_Click);
             // 
+            // Txt_CodigoForm
+            // 
+            this.Txt_CodigoForm.Location = new System.Drawing.Point(12, 32);
+            this.Txt_CodigoForm.Name = "Txt_CodigoForm";
+            this.Txt_CodigoForm.Size = new System.Drawing.Size(124, 20);
+            this.Txt_CodigoForm.TabIndex = 24;
+            // 
+            // Lbl_CodigoForm
+            // 
+            this.Lbl_CodigoForm.AutoSize = true;
+            this.Lbl_CodigoForm.Location = new System.Drawing.Point(8, 16);
+            this.Lbl_CodigoForm.Name = "Lbl_CodigoForm";
+            this.Lbl_CodigoForm.Size = new System.Drawing.Size(70, 13);
+            this.Lbl_CodigoForm.TabIndex = 25;
+            this.Lbl_CodigoForm.Text = "Nome Cliente";
+            // 
             // Lbl_Telefone
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -581,5 +602,7 @@
         private System.Windows.Forms.ToolStripButton ApagatoolStripButton;
         private System.Windows.Forms.ToolStripButton LimpartoolStripButton;
         private System.Windows.Forms.MaskedTextBox Msk_RendaFamiliar;
+        private System.Windows.Forms.Label Lbl_CodigoForm;
+        private System.Windows.Forms.TextBox Txt_CodigoForm;
     }
 }

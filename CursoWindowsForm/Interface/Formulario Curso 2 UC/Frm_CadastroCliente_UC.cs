@@ -18,6 +18,7 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
 {
     public partial class Lbl_Telefone : UserControl
     {
+        int controle = 0;
         public Lbl_Telefone()
         {
             InitializeComponent();
@@ -44,6 +45,8 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
             Rdb_Masculino.Text = "Masculino";
             Rdb_Indefinido.Text = "Indefinido";
             Msk_RendaFamiliar.Text = "0.00";
+            Lbl_CodigoForm.Text = "Codigo Cliente";
+            Txt_CodigoForm.Enabled = false;
             Cmb_Estados.Items.Clear();
             var estados = Cls_Uteis.EstadosBrasileiros();
             foreach (var item in estados)
@@ -174,12 +177,74 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
             Chk_TemPai.Checked = false;
             Txt_Codigo.Text = "";
             Cmb_Estados.SelectedIndex = -1;
-            Txt_Codigo.Text = "";
+            Txt_CodigoForm.Text = "";
         }
 
         private void abrirToolStripButton_Click(object sender, EventArgs e)
         {
             ApagatoolStripButton.Enabled = true;
+            BuscarCliente();
+            
+        }
+        private void BuscarCliente()
+        {
+            if (Txt_Codigo.Text == "")
+            {
+                MessageBox.Show("Insira o código de cliente para buscar. Não é permitida a informação em branco.", "Messagem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                var F = new Fichario("C:\\Users\\Admin\\source\\repos\\CursoWindowsForm\\Fichario");
+                if (F.Status)
+                {
+                    var clienteJson = F.Buscar(Txt_Codigo.Text);
+                    if (F.Status)
+                    {
+                        var C = ClienteModelo.DesSerializedClassUnit(clienteJson);
+                        DesabilitarHabilitarComponentes(true);
+                        EscreverFormulario(C);
+                    }
+                    else
+                    {
+                        LimparFormulario();
+                        DesabilitarHabilitarComponentes(false);
+                        MessageBox.Show($"Error: {F.Mensagem}", "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Error: {F.Mensagem}", "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void EscreverFormulario(ClienteModelo.Unit Cliente)
+        {
+            Txt_Bairro.Text = Cliente.Bairro;
+            Txt_Cidade.Text = Cliente.Cidade;
+            Txt_Complemento.Text = Cliente.Complemento;
+            Txt_Logradouro.Text = Cliente.Logradouro;
+            Txt_NomeCliente.Text = Cliente.NomeCliente;
+            Txt_NomeMae.Text = Cliente.NomeMae;
+            Txt_NomePai.Text = Cliente.NomePai;
+            Txt_Profissao.Text = Cliente.Profissao;
+            Msk_CEP.Text = Cliente.Cep;
+            Msk_CPF.Text = Cliente.Cpf;
+            Txt_CodigoForm.Text = Cliente.Id.ToString();
+            Msk_RendaFamiliar.Text = Cliente.RendaFamiliar.ToString();
+            Msk_Telefone.Text = Cliente.Telefone;
+            Chk_TemPai.Checked = Cliente.NaoTemPai;
+            Cmb_Estados.SelectedItem = Cliente.Estado;
+            if (Cliente.Genero == 1)
+            {
+                Rdb_Feminino.Checked = true;
+            }else if(Cliente.Genero == 0)
+            {
+                Rdb_Masculino.Checked = true;
+            }
+            else
+            {
+                Rdb_Indefinido.Checked = true;
+            }
         }
 
         private void salvarToolStripButton_Click(object sender, EventArgs e)
@@ -200,22 +265,32 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
                     if (F.Status)
                     {
                         MessageBox.Show("Ok: " + F.Mensagem, "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LimparFormulario();
+                        salvarToolStripButton.Enabled = false;
+                        abrirToolStripButton.Enabled = true;
+                        novoToolStripButton.Enabled = true;
+                        DesabilitarHabilitarComponentes(false);
                     }
                     else
                     {
-                        MessageBox.Show("Error: " + F.Mensagem, "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        var mensagem = MessageBox.Show("Error: " + F.Mensagem, "Mensagem", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                        if (mensagem == DialogResult.OK)
+                        {
+                            MessageBox.Show("Dados Alterados com sucesso!!  ", "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            F.IncluirAction(C.Id, ClienteJson);
+                            LimparFormulario();
+                            salvarToolStripButton.Enabled = false;
+                            abrirToolStripButton.Enabled = true;
+                            novoToolStripButton.Enabled = true;
+                            DesabilitarHabilitarComponentes(false);
+                        }
                     }
                 }
                 else
                 {
                     MessageBox.Show("Error: " + F.Mensagem, "Mensagem", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                MessageBox.Show("Classe instanciada com sucesso. Dados Gravados!","ByteBank - Cad. Cliente",MessageBoxButtons.OK,MessageBoxIcon.Information);
-                LimparFormulario();
-                salvarToolStripButton.Enabled = false;
-                abrirToolStripButton.Enabled = true;
-                novoToolStripButton.Enabled = true;
-                DesabilitarHabilitarComponentes(false);
+                }                
+                
             }
             catch (ValidationException ex)
             {
@@ -232,8 +307,36 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
 
         private void ApagatoolStripButton_Click(object sender, EventArgs e)
         {
-            var Mensagem = new Frm_Aviso("Aviso", "sucesso", "Dados excluídos com sucesso!");
-            Mensagem.ShowDialog();
+            
+            if (Txt_CodigoForm.Text == "")
+            {
+                MessageBox.Show("Insira o codigo do cliente para exclusão", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                var messagem = MessageBox.Show($"Deseja realmente excluir o cliente codigo: {Txt_CodigoForm.Text}?","Aviso",MessageBoxButtons.OKCancel,MessageBoxIcon.Exclamation);
+                if(DialogResult.OK == messagem)
+                {
+                    var F = new Fichario("C:\\Users\\Admin\\source\\repos\\CursoWindowsForm\\Fichario");
+                    try
+                    {
+                        F.Excluir(Txt_CodigoForm.Text);
+                        if (F.Status)
+                        {
+                            LimparFormulario();
+                            DesabilitarHabilitarComponentes(false);
+                            MessageBox.Show(F.Mensagem, "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Não foi possível excluir o cliente {F.Mensagem}", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }catch(Exception ex)
+                    {
+                        MessageBox.Show($"Error: {F.Mensagem}", "Erro Validação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
         }
 
         private void maskedTextBox1_MaskInputRejected_1(object sender, MaskInputRejectedEventArgs e)
@@ -250,9 +353,9 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
             var NomeCliente = Txt_NomeCliente.Text;
             var n = 0;
             int Id;
-            if (int.TryParse(Txt_Codigo.Text, out n))
+            if (int.TryParse(Txt_CodigoForm.Text, out n))
             {
-                Id = int.Parse(Txt_Codigo.Text) < 0 ? 0 : int.Parse(Txt_Codigo.Text);
+                Id = int.Parse(Txt_CodigoForm.Text) < 0 ? 0 : int.Parse(Txt_Codigo.Text);
             }
             else
             {
@@ -343,6 +446,19 @@ namespace CursoWindowsForm.Interface.Formulario_Curso_2_UC
                 Txt_Complemento.Text = "";
                 Txt_Logradouro.Text = "";
                 Cmb_Estados.SelectedIndex = -1;
+            }
+        }
+
+        private void Txt_Codigo_KeyUp(object sender, KeyEventArgs e)
+        {
+            
+            if (e.KeyValue == 13 && controle == 0)
+            {
+                BuscarCliente();
+                controle++;
+            }
+            else{
+                controle = 0;
             }
         }
     }

@@ -324,6 +324,7 @@
     <None Include="Resources\Frm_ValidaSenha.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\mais%282%29.png" />
     <None Include="Resources\LimparBarra.png" />
     <None Include="Resources\ExcluirBarra.png" />
     <None Include="Resources\user.png" />

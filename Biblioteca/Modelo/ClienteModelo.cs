@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 
 namespace Biblioteca.Modelo
 {
+    /// <summary>
+    /// Classe que representa cadastro de Cliente.
+    /// </summary>
     public class ClienteModelo
     {
         public class Unit
@@ -18,7 +21,7 @@ namespace Biblioteca.Modelo
 
             [Required(ErrorMessage = "Impossivel Inserir Cliente sem informação de Cliente.")]
             [StringLength(50,ErrorMessage ="Deve ter no máximo 50 caracteres")]
-            public string NomeCliente { get; private set; }
+            public string NomeCliente { get; set; }
 
             [Required(ErrorMessage ="Impossivel Inserir Cliente sem informação de CPF.")] 
             //[StringLength(14,MinimumLength =14,ErrorMessage ="CPF deve ter 11 digitos")]
@@ -35,6 +38,8 @@ namespace Biblioteca.Modelo
             public bool NaoTemPai { get; set; }
 
             [Required(ErrorMessage ="Gênero obrigátorio")]
+
+            /// 0 - Masculino 1 - Feminino 2 - Indefinido
             public int Genero { get; set; }
 
             [Required(ErrorMessage ="CEP obrigátorio")]
@@ -70,7 +75,7 @@ namespace Biblioteca.Modelo
             [Range(0,double.MaxValue,ErrorMessage ="Renda Familiar dever ser um número positivo")]
             public double RendaFamiliar { get; set; }
             /// <summary>
-            /// Para criação de classe cliente é necessario informar 3 parãmetros
+            /// Para criação de classe cliente é necessario informar 3 parâmetros
             /// </summary>
             /// <param name="nome">Nome do CLiente</param>
             /// <param name="cpf">CPF</param>
@@ -86,13 +91,12 @@ namespace Biblioteca.Modelo
         }
         public class List
         {
-            public List<Unit> ListCliente { get; set; }
+            public List<Unit> ListUnit { get; set; }
 
         }
 
         public static Unit DesSerializedClassUnit(string vJson)
         {
-
             return JsonConvert.DeserializeObject<Unit>(vJson);
         }
         public static string SerializedClassUnit(Unit unit)
